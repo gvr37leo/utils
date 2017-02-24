@@ -1,0 +1,22 @@
+{
+  "name": "utilsx",
+  "version": "1.0.0",
+  "description": "some utility functions",
+  "main": "utils.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gvr37leo/utils.git"
+  },
+  "keywords": [
+    "utils"
+  ],
+  "author": "paul boon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gvr37leo/utils/issues"
+  },
+  "homepage": "https://github.com/gvr37leo/utils#readme"
+}
