@@ -43,5 +43,23 @@ function create2dArray(v, fill){
 
 function getMousePos(canvas, evt) {
     var rect = canvas.getBoundingClientRect();
-    return new Vector(evt.clientX - rect.left, evt.clientY - rect.top)
+    return new Vector2(evt.clientX - rect.left, evt.clientY - rect.top)
+}
+
+function createCanvasGetContext(x, y){
+    var canvas = document.createElement('canvas')
+    canvas.width = x;
+    canvas.height = y;
+    document.body.appendChild(canvas)
+    var ctxt = canvas.getContext('2d')
+    return ctxt;
+}
+
+var lastUpdate = Date.now()
+
+function runAnimationFrame(callback){
+    var now = Date.now()
+    callback(now - lastUpdate)
+    lastUpdate = now
+    requestAnimationFrame(runAnimationFrame)
 }
