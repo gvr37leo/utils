@@ -78,3 +78,8 @@ function loop(callback){
 function mod(number, modulus){
     return ((number%modulus)+modulus)%modulus;
 }
+
+function* iter(n){
+    var i = 0;
+    while(i < n)yield i++;
+}
