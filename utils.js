@@ -46,20 +46,31 @@ function getMousePos(canvas, evt) {
     return new Vector2(evt.clientX - rect.left, evt.clientY - rect.top)
 }
 
-function createCanvasGetContext(x, y){
+function createCanvasGetContext(x, y, canvasOut){
     var canvas = document.createElement('canvas')
     canvas.width = x;
     canvas.height = y;
+    canvasOut = canvas;
     document.body.appendChild(canvas)
     var ctxt = canvas.getContext('2d')
     return ctxt;
 }
 
-var lastUpdate = Date.now()
+function random(min, max){
+    return Math.random() * (max - min) + min
+}
 
-function runAnimationFrame(callback){
+function randomSpread(center, spread){
+    var half = spread / 2
+    return random(center - half, center + half)
+}
+
+var lastUpdate = Date.now();
+function loop(callback){
     var now = Date.now()
     callback(now - lastUpdate)
-    lastUpdate = now
-    requestAnimationFrame(runAnimationFrame)
+    lastUpdate = now()
+    requestAnimationFrame(() => {
+        loop(callback)
+    })
 }
