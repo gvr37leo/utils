@@ -69,7 +69,7 @@ var lastUpdate = Date.now();
 function loop(callback){
     var now = Date.now()
     callback(now - lastUpdate)
-    lastUpdate = now()
+    lastUpdate = now
     requestAnimationFrame(() => {
         loop(callback)
     })
