@@ -74,3 +74,7 @@ function loop(callback){
         loop(callback)
     })
 }
+
+function mod(number, modulus){
+    return ((number%modulus)+modulus)%modulus;
+}
