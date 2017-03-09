@@ -3,9 +3,6 @@ Utility functions
 utility functions that help you by having to write less.
 A lot of these are inspired by p5.js but luckily here you don't have to use them in the setup or draw functions
 
-`add(vector)`  
-adds another vector to this one modifying itself
-
 `map(val, start1, stop1, start2, stop2)`  
 works the same as in p5.js, maps a value from 1 range to another
 
