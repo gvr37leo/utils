@@ -1,6 +1,6 @@
 {
   "name": "utilsx",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "some utility functions",
   "main": "utils.js",
   "scripts": {
