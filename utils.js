@@ -83,3 +83,22 @@ function* iter(n){
     var i = 0;
     while(i < n)yield i++;
 }
+
+var keys = {}
+
+document.addEventListener('keydown', (e) => {
+    keys[e.keyCode] = true  
+})
+
+document.addEventListener('keyup', (e) => {
+    keys[e.keyCode] = false  
+})
+
+function getMoveInput(){
+    var dir = new Vector2(0,0)
+    if(keys[37] || keys[65])dir.x--//left
+    if(keys[38] || keys[87])dir.y++//up
+    if(keys[39] || keys[68])dir.x++//right
+    if(keys[40] || keys[83])dir.y--//down
+    return dir;
+}
