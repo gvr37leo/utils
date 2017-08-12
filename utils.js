@@ -46,19 +46,14 @@ function getMousePos(canvas, evt) {
     return new Vector2(evt.clientX - rect.left, evt.clientY - rect.top)
 }
 
-function createCanvasGetContext(x, y, canvasOut){
+function createCanvas(x, y){
     var canvas = document.createElement('canvas')
     canvas.width = x;
     canvas.height = y;
-
-    canvasOut.canvas = canvas;
     document.body.appendChild(canvas)
     var ctxt = canvas.getContext('2d')
-    return ctxt;
+    return {ctxt:ctxt,canvas:canvas};
 }
-var canvas = {}
-createCanvasGetContext(10,10,canvas)
-console.log(canvas)
 
 function random(min, max){
     return Math.random() * (max - min) + min

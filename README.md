@@ -27,10 +27,14 @@ returns a 2D array filled with some value. vector specifies the size of the 2d a
 `getMousePos(canvas, evt)`  
 returns the mouse position in vector form relative to the canvas. Also needs the mousedown or mouseup event.
 
-`createCanvasGetContext(x, y, canvasOut)`  
+`createCanvas(x, y)`  
 similar to the p5.js version
 creates a canvas with the specified size and appends it to the body element.
-Also returns the 2Dcontext. canvasOut is optional but the canvas element will be assigned to it.
+```
+var obj = createCanvas(400,400);
+var ctxt = obj.ctxt;
+var canvas = obj.canvas
+```
 
 `random(min, max)`  
 same as in p5.js
