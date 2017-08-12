@@ -50,3 +50,17 @@ javascripts % only works with positive values so use this if you also need somet
 iter(ate) is a generator function and is supposed to be used in for...of loops.
 so instead of writing `for(var i = 0; i < 10; i++)` you can write `for(var i of iter(10))`.
 sadly doesnt save that much typing but atleast it looks a little neater
+
+`getMoveInput()`  
+returns a 2D vector which corresponds to the wasd/arrow keys.
+
+`keys`  
+contains a map with the state of all keys for example `keys[87]` returns true if the w key is pressed
+
+`getFiles(strings):Promise`  
+returns a promise which can then be called like this.
+```
+getFiles(['http://localhost:8000/test.html']).then((values) => {
+    console.log(values)
+})
+```

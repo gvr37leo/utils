@@ -50,11 +50,15 @@ function createCanvasGetContext(x, y, canvasOut){
     var canvas = document.createElement('canvas')
     canvas.width = x;
     canvas.height = y;
-    canvasOut = canvas;
+
+    canvasOut.canvas = canvas;
     document.body.appendChild(canvas)
     var ctxt = canvas.getContext('2d')
     return ctxt;
 }
+var canvas = {}
+createCanvasGetContext(10,10,canvas)
+console.log(canvas)
 
 function random(min, max){
     return Math.random() * (max - min) + min
@@ -87,11 +91,11 @@ function* iter(n){
 var keys = {}
 
 document.addEventListener('keydown', (e) => {
-    keys[e.keyCode] = true  
+    keys[e.keyCode] = true
 })
 
 document.addEventListener('keyup', (e) => {
-    keys[e.keyCode] = false  
+    keys[e.keyCode] = false
 })
 
 function getMoveInput(){
@@ -101,4 +105,15 @@ function getMoveInput(){
     if(keys[39] || keys[68])dir.x++//right
     if(keys[40] || keys[83])dir.y--//down
     return dir;
+}
+
+function getFiles(strings){
+    var promises = []
+    for(var string of strings){
+        var promise = fetch(string)
+        .then(resp => resp.text())
+        .then(text => text)
+        promises.push(promise)
+    }
+    return Promise.all(promises)
 }
