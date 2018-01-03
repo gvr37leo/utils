@@ -30,15 +30,46 @@ function rangeContain(a1,a2,b1,b2){//as in does a enclose b----- so returns true
     return max(a1, a2) >= max(b1, b2) && min(a1,a2) <= max(b1,b2);
 }
 
-function create2dArray(v, fill){
-    var rows = new Array(v.x)
-    for(var i = 0; i < v.x; i++){
-        rows[i] = new Array(v.y)
-        for(var j = 0; j < v.y; j++){
-            rows[i][j] = fill
+function createNDimArray(dimensions, fill) {
+    if (dimensions.length > 0) {
+        function helper(dimensions) {
+            var dim = dimensions[0];
+            var rest = dimensions.slice(1);
+            var newArray = new Array();
+            for (var i = 0; i < dim; i++) {
+                newArray[i] = helper(rest);
+            }
+            return newArray;
         }
+        var array = helper(dimensions);
+        var looper = new Vector2(0, 0);
+        looper.vals = dimensions;
+        looper.loop((pos) => {
+            setElement(array, pos.vals, fill(pos));
+        });
+        return array;
     }
-    return rows;
+    else {
+        return undefined;
+    }
+}
+
+function getElement(array, indices) {
+    if (indices.length == 0) {
+        return null;
+    }
+    else {
+        return getElement(array[indices[0]], indices.slice(1));
+    }
+}
+
+function setElement(array, pos, val) {
+    if (pos.length == 1) {
+        array[pos[0]] = val;
+    }
+    else {
+        setElement(array[pos[0]], pos.slice(1), val);
+    }
 }
 
 function getMousePos(canvas, evt) {
