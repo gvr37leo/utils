@@ -143,3 +143,19 @@ function getFiles(strings){
     }
     return Promise.all(promises)
 }
+
+function findbestIndex(list, evaluator) {
+    if (list.length < 1) {
+        return -1;
+    }
+    var bestIndex = 0;
+    var bestscore = evaluator(list[0])
+    for (var i = 1; i < list.length; i++) {
+        var score = evaluator(list[i])
+        if (score > bestscore) {
+            bestscore = score
+            bestIndex = i
+        }
+    }
+    return bestIndex
+}
