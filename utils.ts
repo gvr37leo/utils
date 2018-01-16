@@ -1,4 +1,4 @@
-/// <reference path="node_modules/vectorx/vector.js" />
+/// <reference path="node_modules/vectorx/vector.ts" />
 
 
 function map(val1: number, start1: number, stop1: number, start2: number, stop2: number): number{
@@ -61,7 +61,7 @@ function getElement<T>(array:T[], indices:number[]):T {
         return null;
     }
     else {
-        return getElement(array[indices[0]], indices.slice(1));
+        return getElement(array[indices[0]] as any, indices.slice(1));
     }
 }
 
@@ -70,7 +70,7 @@ function setElement<T>(array:T[], pos:number[], val:T) {
         array[pos[0]] = val;
     }
     else {
-        setElement(array[pos[0]], pos.slice(1), val);
+        setElement(array[pos[0]] as any, pos.slice(1), val);
     }
 }
 
