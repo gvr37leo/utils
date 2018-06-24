@@ -135,6 +135,12 @@ function getMoveInput():Vector2{
     return dir;
 }
 
+function getMoveInputYFlipped():Vector2{
+    var input = getMoveInput()
+    input.y *= -1
+    return input
+}
+
 function getFiles(strings:string[]){
     var promises = []
     for(var string of strings){
@@ -172,4 +178,25 @@ function string2html(string): HTMLElement {
     var div = document.createElement('div')
     div.innerHTML = string;
     return div.children[0] as HTMLElement;
+}
+
+function line(ctxt:CanvasRenderingContext2D,a:Vector2,b:Vector2){
+    ctxt.beginPath()
+    ctxt.moveTo(a.x,a.y)
+    ctxt.lineTo(b.x,b.y)
+    ctxt.stroke()
+}
+
+function lerp(a:number,b:number,r:number):number{
+    return a + to(a,b) * r
+}
+
+function to(a:number,b:number):number{
+    return b - a;
+}
+
+function swap<T>(arr:T[],a:number = 0,b:number = 1){
+    var temp = arr[a];
+    arr[a] = arr[b];
+    arr[b] = temp;
 }
