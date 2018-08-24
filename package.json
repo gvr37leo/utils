@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/gvr37leo/utils#readme",
   "dependencies": {
-    "vectorx": "^2.2.0"
+    "vectorx": "^3.0.0"
   }
 }

@@ -44,7 +44,7 @@ function createNDimArray<T>(dimensions: number[], fill:(pos:Vector) => T) {
             return newArray;
         }
         var array = helper(dimensions);
-        var looper = new Vector2(0, 0);
+        var looper = new Vector(0, 0);
         looper.vals = dimensions;
         looper.loop((pos) => {
             setElement(array, pos.vals, fill(pos));
@@ -76,7 +76,7 @@ function setElement<T>(array:T[], pos:number[], val:T) {
 
 function getMousePos(canvas:HTMLCanvasElement, evt:MouseEvent) {
     var rect = canvas.getBoundingClientRect();
-    return new Vector2(evt.clientX - rect.left, evt.clientY - rect.top)
+    return new Vector(evt.clientX - rect.left, evt.clientY - rect.top)
 }
 
 function createCanvas(x: number, y: number){
@@ -126,8 +126,8 @@ document.addEventListener('keyup', (e) => {
     keys[e.keyCode] = false
 })
 
-function getMoveInput():Vector2{
-    var dir = new Vector2(0,0)
+function getMoveInput():Vector{
+    var dir = new Vector(0,0)
     if(keys[37] || keys[65])dir.x--//left
     if(keys[38] || keys[87])dir.y++//up
     if(keys[39] || keys[68])dir.x++//right
@@ -135,7 +135,7 @@ function getMoveInput():Vector2{
     return dir;
 }
 
-function getMoveInputYFlipped():Vector2{
+function getMoveInputYFlipped():Vector{
     var input = getMoveInput()
     input.y *= -1
     return input
@@ -180,7 +180,7 @@ function string2html(string): HTMLElement {
     return div.children[0] as HTMLElement;
 }
 
-function line(ctxt:CanvasRenderingContext2D,a:Vector2,b:Vector2){
+function line(ctxt:CanvasRenderingContext2D,a:Vector,b:Vector){
     ctxt.beginPath()
     ctxt.moveTo(a.x,a.y)
     ctxt.lineTo(b.x,b.y)
