@@ -1,6 +1,6 @@
 /// <reference path="node_modules/vectorx/vector.ts" />
 
-
+var TAU = Math.PI * 2
 function map(val:number,from1:number,from2:number,to1:number,to2:number):number{
     return lerp(inverseLerp(val,from1,from2),to1,to2)
 }
