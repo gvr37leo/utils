@@ -1,8 +1,12 @@
 /// <reference path="node_modules/vectorx/vector.ts" />
 
 
-function map(val1: number, start1: number, stop1: number, start2: number, stop2: number): number{
-    return start2 + (stop2 - start2) * ((val1 - start1) / (stop1 - start1))
+function map(val:number,from1:number,from2:number,to1:number,to2:number):number{
+    return lerp(inverseLerp(val,from1,from2),to1,to2)
+}
+
+function inverseLerp(val:number,a:number,b:number):number{
+    return to(a,val) / to(a,b)
 }
 
 function inRange(min: number, max: number, value: number):boolean{
@@ -213,6 +217,15 @@ class RNG{
     next(){
         this.seed = (this.multiplier * this.seed + this.increment) % this.mod
         return this.seed
+    }
+
+    norm(){
+        return this.next() / this.mod
+    }
+    
+    
+    range(min:number,max:number){
+        return this.norm() * to(min,max) + min
     }
 }
 
