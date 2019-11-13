@@ -529,6 +529,9 @@ function createVector(x:Hor,y:Vert):Vector{
 }
 var zero = new Vector(0,0)
 var one = new Vector(1,1)
+var minusone = new Vector(-1,-1)
+var half = new Vector(0.5,0.5)
+
 var botleft = createVector(Hor.left,Vert.bottom)
 var botmiddle = createVector(Hor.middle,Vert.bottom)
 var botright = createVector(Hor.right,Vert.bottom)
@@ -715,4 +718,74 @@ function rotate2dCenter(v:Vector,rotations:number,center:Vector){
     rotate2d(v,rotations)
     v.add(center)
     return v
+}
+
+function loadImages(urls:string[]):Promise<HTMLImageElement[]>{
+    var promises:Promise<HTMLImageElement>[] = []
+
+    for(var url of urls){
+        promises.push(new Promise((res,rej) => {
+            var image = new Image()
+            image.onload = e => {
+                res(image)     
+            }
+            image.src = url
+        }))
+    }
+
+    return Promise.all(promises)
+}
+
+function convertImages2Imagedata(images:HTMLImageElement[]):ImageData[]{
+    var canvas = document.createElement('canvas');
+    var context = canvas.getContext('2d');
+    var result:ImageData[] = []
+    for(var img of images){
+        canvas.width = img.width;
+        canvas.height = img.height;
+        context.drawImage(img, 0, 0 );
+        result.push(context.getImageData(0, 0, img.width, img.height))
+    }
+    return result
+}
+
+function round(v:Vector){
+    return v.map((arr,i) => arr[i] = Math.round(arr[i]))
+}
+
+function floor(v:Vector){
+    return v.map((arr,i) => arr[i] = Math.floor(arr[i]))
+}
+
+function addrange<T>(a:T[],b:T[]){
+    for(var v of b){
+        a.push(v)
+    }
+}
+
+function create2DArray<T>(size:Vector,filler:(pos:Vector) => T){
+    var result = new Array(size.y)
+    for(var i = 0; i < size.y;i++){
+        result[i] = new Array(size.x)
+    }
+    size.loop2d(v => {
+        result[v.y][v.x] = filler(v)
+    })
+    return result
+}
+
+function contains(box:Vector,point:Vector){
+    return inRange(0,box.x,point.x) && inRange(0,box.y,point.y)
+}
+
+function get2DArraySize(arr:any[][]){
+    return new Vector(arr[0].length,arr.length)
+}
+
+function index2D<T>(arr:T[][],i:Vector){
+    return arr[i.y][i.x]
+}
+
+function copy2dArray<T>(arr:T[][]){
+    return create2DArray(get2DArraySize(arr),pos => index2D(arr,pos))
 }
